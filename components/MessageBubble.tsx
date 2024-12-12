@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
+import { InlineAd } from "@kontextso/sdk-react-native";
 
 interface MessageProps {
   message: {
@@ -73,6 +74,31 @@ const MessageBubble: React.FC<MessageProps> = ({ message, isLast }) => {
           ))}
         </View>
       </View>
+      {isLast && (
+        <InlineAd
+          code="inlineAd"
+          wrapper={(children: any) => {
+            return (
+              <View
+                style={[
+                  styles.messageContainer,
+                  styles.assistantMessageContainer,
+                ]}
+              >
+                <View
+                  style={[
+                    styles.messageContent,
+                    styles.assistantMessageContent,
+                  ]}
+                >
+                  {children}
+                </View>
+              </View>
+            );
+          }}
+          messageId={message.id}
+        />
+      )}
     </>
   );
 };
